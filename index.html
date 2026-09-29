@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sammy | Websites with AI assistants for small businesses</title>
+<meta name="description" content="Sammy builds mobile-friendly websites for small businesses and adds an AI assistant that answers customer questions around the clock.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+
+
+<style>
+:root {
+  --paper: #F5F7F4;   /* page background */
+  --ink: #14201C;     /* main text */
+  --leaf: #1F6B4F;    /* green: links, chat header, contact block */
+  --signal: #FFB400;  /* amber: buttons */
+  --mist: #D5E0D9;    /* thin lines */
+  --muted: #4B5B54;   /* softer text */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Figtree", system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 1.0625rem;
+}
+h1, h2, h3, .brand {
+  font-family: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+  letter-spacing: -0.015em;
+}
+a { color: var(--leaf); }
+:focus-visible { outline: 3px solid var(--leaf); outline-offset: 3px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* Header */
+.top { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; }
+.brand { font-weight: 800; font-size: 1.4rem; color: var(--ink); text-decoration: none; }
+.top-link { font-weight: 600; }
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 14px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--signal);
+  color: var(--ink);
+  transition: transform 0.15s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.link-quiet { font-weight: 600; }
+
+/* Hero */
+.hero { display: grid; gap: 40px; padding: 32px 0 72px; align-items: center; }
+.hero h1 { font-size: clamp(2.2rem, 7vw, 3.7rem); line-height: 1.04; font-weight: 800; max-width: 15ch; }
+.lead { margin-top: 20px; max-width: 50ch; color: var(--muted); font-size: 1.15rem; }
+.actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
+@media (min-width: 860px) {
+  .hero { grid-template-columns: 1.1fr 0.9fr; gap: 64px; padding-top: 56px; }
+}
+
+/* Sample chat (the memorable moment: messages appear one by one on load) */
+.chat {
+  background: #fff;
+  border: 1px solid var(--mist);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -22px rgba(20, 32, 28, 0.35);
+}
+.chat-head {
+  background: var(--leaf);
+  color: var(--paper);
+  padding: 14px 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--signal); }
+.chat-body { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+.msg {
+  max-width: 84%;
+  padding: 10px 14px;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  animation: rise 0.45s ease both;
+  animation-delay: var(--d, 0s);
+}
+.msg.customer { align-self: flex-end; background: var(--leaf); color: var(--paper); border-radius: 14px 14px 4px 14px; }
+.msg.bot { align-self: flex-start; background: #EEF3EF; border-radius: 14px 14px 14px 4px; }
+.chat-note { padding: 0 18px 16px; font-size: 0.85rem; color: var(--muted); }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .msg { animation: none; }
+  .btn { transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* Content sections */
+.section { padding: 64px 0; border-top: 1px solid var(--mist); scroll-margin-top: 8px; }
+.section h2 { font-size: clamp(1.6rem, 4.5vw, 2.3rem); font-weight: 800; line-height: 1.1; margin-bottom: 28px; max-width: 20ch; }
+.rows { list-style: none; }
+.row { display: grid; gap: 6px; padding: 22px 0; border-top: 1px solid var(--mist); }
+.row:last-child { border-bottom: 1px solid var(--mist); }
+.row h3 { font-size: 1.25rem; font-weight: 600; }
+.row p { color: var(--muted); max-width: 60ch; }
+.status { display: block; margin-top: 6px; font-size: 0.9rem; font-weight: 600; color: var(--leaf); }
+@media (min-width: 760px) {
+  .row { grid-template-columns: 0.8fr 1.6fr; gap: 32px; }
+}
+
+/* About */
+.about { display: grid; gap: 24px; align-items: start; }
+.avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; background: var(--mist); }
+.about p { max-width: 58ch; }
+.about p + p { margin-top: 14px; }
+@media (min-width: 760px) {
+  .about { grid-template-columns: 140px 1fr; gap: 36px; }
+}
+
+/* Contact block */
+.contact { background: var(--leaf); color: var(--paper); padding: 72px 0; }
+.contact h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 800; line-height: 1.08; max-width: 18ch; }
+.contact p { margin-top: 16px; max-width: 52ch; color: #D9E8DF; }
+.contact .mail { color: var(--paper); font-weight: 600; }
+.contact :focus-visible { outline-color: var(--signal); }
+
+/* Footer */
+.foot { padding: 24px 0; color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+
+<body>
+
+<header class="wrap top">
+  <a class="brand" href="#">Websites • AI Assistants • Digital Solutions</a>
+  <a class="top-link" href="https://wa.me/2349158619641?text=Hi%20Samuel%2C%20I%27d%20like%20a%20website%20for%20my%20business.">WhatsApp me</a>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="wrap hero">
+    <div>
+      <h1>Your website answers customers while you sleep.</h1>
+      <p class="lead">I'm Samuel. I build websites for businesses and add an AI assistant that replies to visitors around the clock, using your real prices, hours, and policies.</p>
+      <div class="actions">
+        <a class="btn" href="https://wa.me/2349158619641?text=Hi%20Samuel%2C%20I%27d%20like%20a%20website%20for%20my%20business.">Message me on WhatsApp</a>
+        <a class="link-quiet" href="#work">See sample projects</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="chat" role="img" aria-label="Example chat: a customer asks a bakery's assistant about Sunday delivery and ordering a birthday cake.">
+        <div class="chat-head"><span class="dot"></span> Bella's Bakery assistant</div>
+        <div class="chat-body">
+          <div class="msg customer" style="--d:0.4s">Do you deliver to Yaba on Sunday?</div>
+          <div class="msg bot" style="--d:1.4s">We're closed on Sundays, but we deliver Monday to Saturday within Lagos for ₦2,000. Want to order for tomorrow?</div>
+          <div class="msg customer" style="--d:2.8s">Yes, a birthday cake for Friday</div>
+          <div class="msg bot" style="--d:3.8s">Custom cakes need 48 hours' notice, so Friday works if you order today. What size and flavour would you like?</div>
+        </div>
+        <p class="chat-note">Example conversation. This is what your customers would see.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <h2>What I build for you</h2>
+      <ul class="rows">
+        <li class="row">
+          <h3>Business website</h3>
+          <p>A fast, mobile-friendly site with your services, prices, and a WhatsApp button, because most of your customers browse on their phones.</p>
+        </li>
+        <li class="row">
+          <h3>AI assistant</h3>
+          <p>A chat bubble on your site that answers questions using your real information, collects the customer's name and number, and passes them to you when it isn't sure.</p>
+        </li>
+        <li class="row">
+          <h3>Monthly care</h3>
+          <p>I keep everything running, update your prices and hours, and review the assistant's answers so they stay accurate.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <h2>Sample projects</h2>
+      <ul class="rows">
+        <li class="row">
+          <h3>Bella's Bakery</h3>
+          <div>
+            <p>A bakery site with an assistant that handles menu, delivery, and custom cake orders.</p>
+            <span class="status">Live link coming soon</span>
+          </div>
+        </li>
+        <li class="row">
+          <h3>Salon booking site</h3>
+          <div>
+            <p>A salon site with services, prices, and an assistant that collects booking requests.</p>
+            <span class="status">Live link coming soon</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <h2>About me</h2>
+      <div class="about">
+        <img class="avatar" alt="Portrait of Sammy" src="compressed-portrait.jpg">
+        <div>
+          <p>I’m Samuel — a biotechnology student, builder, and problem-solver with a passion for turning ideas into useful digital experiences.</p>
+          <p>I build modern websites and AI assistants for businesses, creating tools that help them look professional online, engage their customers, and automate everyday interactions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2>Tell me about your business.</h2>
+      <p>Send your business name and what you sell. I'll reply with how I'd set up your website and assistant, and a quote.</p>
+      <div class="actions">
+        <a class="btn" href="https://wa.me/2349158619641?text=Hi%20Sammy%2C%20I%27d%20like%20a%20website%20for%20my%20business.">Message me on WhatsApp</a>
+        <a class="mail" href="mailto:samuelidowu1810@gmail.com">samuelidowu1810@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <p>&copy;  2026 Samuel — Turning ideas into digital experiences.</p>
+</footer>
+
+</body>
+</html>
